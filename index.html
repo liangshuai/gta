@@ -1,0 +1,1059 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>GTA项目前端经验总结</title>
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			
+			<div class="slides">
+				<!-- 首页 -->
+				<section>
+					<h1>前端经验总结</h1>
+					<h3>HKGTA前端项目</h3>
+					<p>
+						<small>Created by <a href="http://liangshuai.me" target="_blank">Shuai Liang</a>
+						 and <a href="javascript:void(0);" target="_blank">Steven</a></small></small>
+
+					</p>
+				</section>
+
+				<section>
+					<h2>Topic</h2>
+					<p>
+						<ul>
+							<li>项目架构</li>
+							<li>前端构建</li>
+							<li>编码规范</li>
+							<li>Sass</li>
+							<li>认证与权限</li>
+							<li>部署</li>
+						</ul>
+					</p>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>技术选型</h2>
+						<!-- <p></p>
+						<p>Use the <em>Space</em> key to navigate through all slides.</p>
+						<br>
+						<a href="#" class="navigate-down">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a> -->
+						<img data-src="img/stack.png">
+					</section>
+					
+					<section><!-- 
+						<h2>技术选型</h2> -->
+						<!-- <p></p>
+						<p>Use the <em>Space</em> key to navigate through all slides.</p>
+						<br>
+						<a href="#" class="navigate-down">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a> -->
+						<img data-src="img/overview.png">
+					</section>
+					<section>
+						<img width="300" height="200" src="img/angular.png"/>
+						<br>
+						<ul>
+							<li>双向数据绑定</li>
+							<li>依赖注入</li>
+							<li>模块化</li>
+							<li>组件化</li>
+							<li>...</li>
+						</ul>
+					</section>
+					<section>
+						<!-- <h2>Grunt</h2> -->
+						<img width="300" height="200" src="img/bootstrap.png"/>
+						<br>
+						<ul>
+							<li>丰富的Web组件</li>
+							<li>响应式布局</li>
+							<li>网格系统</li>
+							<li>jQuery插件</li>
+						</ul>
+					</section>
+
+					<section>
+						<!-- <h2>Grunt</h2> -->
+						<img width="300" height="200" src="img/sass.png"/>
+						<br>
+						<ul>
+							<li>工程化的CSS</li>
+							<li>CSS预处理</li>
+							<li>支持变量</li>
+							<li>支持层级嵌套</li>
+							<li>支持宏(Mixin)</li>
+							<li>支持值计算</li>
+						</ul>
+					</section>
+
+					<section>
+						<!-- <h2>Grunt</h2> -->
+						<img width="300" height="200" src="img/bower.png"/>
+						<br>
+						<ul>
+							<li>Web依赖管理工具</li>
+							<li>自动安装依赖的组件</li>
+							<li>组件之间的依赖检测</li>
+							<li>版本兼容性自动检测</li>
+						</ul>
+					</section>
+
+					<section>
+						<!-- <h2>Grunt</h2> -->
+						<img width="300" height="200" src="img/grunt.png"/>
+						<br>
+						<ul>
+							<li>JS文件合并</li>
+							<li>JS代码自动压缩</li>
+							<li>jsHint/jsLint检测</li>
+							<li>Sass编译</li>
+							<li>CSS代码合并压缩</li>
+							<li>监听文件修改</li>
+							<li>版本Hash</li>
+						</ul>
+					</section>
+					<section>
+						<!-- <h2>Grunt</h2> -->
+						<h3>其实我们还可以做的更多</h3>
+					</section>
+					<section>
+						<!-- <h2>Grunt</h2> -->
+						<ul>
+							<li>Jasmine</li>
+							<li>Karma</li>
+							<li>Protractor or Nightwatch</li>
+						</ul>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>前端构建</h2>
+						<p>
+							<img src="img/grunt_tasks.png">
+						</p>
+					</section>
+					<section>
+						<h2>Gruntfile.js编写</h2>
+						<p>类似于Ant中的Build.xml ，Grunt使用Gruntfile.js配置任务</p>
+						<p>
+							<img src="img/grunt-overview.png">
+						</p>
+					</section>
+					<section>
+						<h2>grunt-contrib-clean</h2>
+						<p>
+							执行文件清理任务
+						</p>
+						<p>
+							<img src="img/grunt-clean.png">
+						</p>
+					</section>
+					<section>
+						<h2>grunt-bower-task</h2>
+						<p>
+							执行bower install任务
+						</p>
+						<p>
+							<img src="img/grunt-bower.png">
+						</p>
+					</section>
+					<section>
+						<h2>grunt-contrib-uglify</h2>
+						<p>
+							JS文件压缩插件
+						</p>
+						<p>
+							<img src="img/grunt-uglify.png">
+						</p>
+					</section>
+					<section>
+						<h2>grunt-contrib-cssmin</h2>
+						<p>
+							CSS压缩插件
+						</p>
+						<p>
+							<img src="img/grunt-cssmin.png">
+						</p>
+					</section>
+					<section>
+						<h2>grunt-contrib-concat</h2>
+						<p>
+							文件合并
+						</p>
+						<p>
+							<img src="img/grunt-concat.png">
+						</p>
+					</section>
+					<section>
+						<h2>grunt-contrib-compass</h2>
+						<p>
+							编译Sass
+						</p>
+						<p>
+							<img src="img/grunt-compass.png">
+						</p>
+					</section>
+					<section>
+						<h2>grunt-contrib-watch</h2>
+						<p>
+							监控文件修改，配合connect-livereload实现修改文件即可刷新浏览器
+						</p>
+						<p>
+							<img src="img/grunt-watch.png">
+						</p>
+					</section>
+					<section>
+						<h2>grunt-contrib-connect</h2>
+						<p>
+							监控文件修改，配合connect-livereload实现修改文件即可刷新浏览器
+						</p>
+						<p>
+							<img src="img/grunt-watch.png">
+						</p>
+					</section>
+					<section>
+						<h2>grunt-contrib-jshint</h2>
+						<p>
+							代码规范检测
+						</p>
+						<p>
+							<img src="img/grunt-jshint.png">
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>前端编码规范</h2>
+					<p>
+						<a href="https://github.com/airbnb/javascript/tree/master/es5" target="_blank">JavaScript</a>
+					</p>
+					<p>
+						<a href="https://github.com/airbnb/css" target="_blank">CSS/SASS</a>
+					</p>
+					<p>
+						<a href="http://www.kancloud.cn/thinkphpteam/code-guide/42602" target="_blank">腾讯alloyteam团队前端代码规范</a>
+					</p>
+				</section>
+				<!--- sherry -->
+
+				<section>
+					
+					<section>
+						<h2>Sass</h2>
+					</section>
+<!-- 					<p>
+						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
+					</p> -->
+					<section>
+						<h2>一、 写Sass 前</h2>
+
+						<p>1. 建议将大部分mockup整体review一遍。 这样可以对整个项目做一个简单了解。对一些模块以及功能也会有一定了解，虽然，前期一般只能看到一部分mockup，但是这也为后面 一些文件目录结构的划分有一定的帮助。</p>
+						<p></p>
+							
+					</section>
+					<section>
+						<h3>2. Sass 源文件目录结构划分以及创建;</h3>
+						<p>为什么源文件要划分不同文件？ --- 最主要的原因就是：</p>
+
+					</section>	
+					<section>
+						<h2>可维护性</h2>
+						<p>大型项目必然涉及多人、多团队共同配合开发，这时候就需要保证Sass 文件的可读性、可扩展性以及可维护性。</p>
+
+					</section>
+					<section>
+						<p>例如：</p>
+						<p><img src="img/sass/contents.jpg" height="580" ></p>
+					</section>
+					<section>
+						<h4>构建你的结构体系</h4> 
+						<p>CSS预处理器的特点之一是可以把你的代码分割成很多个文件，而且不会影响性能。这都要归功于Sass的<code><a href="http://my.oschina.net/import" class="referer" target="_blank">@import</a> </code>命令，只要在你的开发环境下，你调用不管多少文件，最终将编译出一个CSS样式文件。</p> 
+						<blockquote> 
+						 <p>多个文件中开发，最终合并输出一个文件。——<a href="http://my.oschina.net/u/2616" class="referer" target="_blank">@Bruce</a> Lee</p> 
+						</blockquote> 
+						<p>开始将你的CSS文件分割成多个文件和文件夹。正如我的一位导师说的“任何事物都有其正确的地方，每个地方都有其正确的事”。那么，这也是我喜欢做的事。</p> 
+					</section>
+					<section>
+						<h2>文件夹构建</h2> 
+						<p>以下转载由大漠根据Hugo Giraudel的《Architecture for a Sass Project》所译的译文，英文出处：http://www.sitepoint.com/architecture-sass-project</p>
+						<p>你在创建CSS的架构的时候也应该如此：你不只是把所有的Sass文件放在一个文件夹下，你会将他们分类。</p> 
+						<p>下面的示例屏示的是我将如何组织我的Sass文件：</p> 
+						<p>正如你所看到的，在根目录底下只有一个<code>main.scss</code>文件，其他<code>.scss</code>文件都根据不同的分类放在对应的文件夹中，只是这些<code>.scss</code>文件前面都有一个下划线(<code>_</code>)，用来告诉Sass，这些<code>.scss</code>文件只是<a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#partials" target="_blank" rel="nofollow">局部</a>，不通过<code><a href="http://my.oschina.net/import" class="referer" target="_blank">@import</a> </code>是不应该被编译出<code>.css</code>文件。事实上，它们是导入和合并文件的<a href="https://gist.github.com/HugoGiraudel/8615243" rel="nofollow">基本文件</a>而以。</p> 
+					</section>
+					<section>
+						<p>推荐范例：</p>
+						<p>
+							<pre class="cs">sass files contents/&nbsp;
+|–&nbsp;layout/&nbsp;
+|&nbsp;|–&nbsp;_grid.scss&nbsp;#&nbsp;Grid&nbsp;system&nbsp;
+|&nbsp;|–&nbsp;_header.scss&nbsp;#&nbsp;Header&nbsp;
+|&nbsp;|–&nbsp;_footer.scss&nbsp;#&nbsp;Footer&nbsp;
+|&nbsp;|–&nbsp;_sidebar.scss&nbsp;#&nbsp;Sidebar&nbsp;
+|&nbsp;|–&nbsp;_forms.scss&nbsp;#&nbsp;Forms&nbsp;
+|&nbsp;...&nbsp;#&nbsp;Etc…&nbsp;
+|&nbsp;
+|–&nbsp;pages/&nbsp;
+|&nbsp;|–&nbsp;_home.scss&nbsp;#&nbsp;Home&nbsp;specific&nbsp;styles&nbsp;
+|&nbsp;|–&nbsp;_contact.scss&nbsp;#&nbsp;Contact&nbsp;specific&nbsp;styles&nbsp;
+|&nbsp;...&nbsp;#&nbsp;Etc…&nbsp;
+|&nbsp;
+|–&nbsp;themes/&nbsp;
+|&nbsp;|–&nbsp;_theme.scss&nbsp;#&nbsp;Default&nbsp;theme&nbsp;
+|&nbsp;|–&nbsp;_admin.scss&nbsp;#&nbsp;Admin&nbsp;theme&nbsp;
+|&nbsp;...&nbsp;#&nbsp;Etc…&nbsp;
+|&nbsp;
+|–&nbsp;vendors/&nbsp;
+|&nbsp;|–&nbsp;_bootstrap.scss&nbsp;#&nbsp;Bootstrap&nbsp;
+|&nbsp;|–&nbsp;_jquery-ui.scss&nbsp;#&nbsp;jQuery&nbsp;UI&nbsp;
+|&nbsp;...&nbsp;#&nbsp;Etc…&nbsp;
+							</pre>
+						</p>
+					</section>
+					<section>
+						<p>推荐范例：</p>
+						<p>
+							<pre class="cs">
+|–&nbsp;layout/&nbsp;
+|&nbsp;|–&nbsp;_grid.scss&nbsp;#&nbsp;Grid&nbsp;system&nbsp;
+|&nbsp;|–&nbsp;_header.scss&nbsp;#&nbsp;Header&nbsp;
+|&nbsp;|–&nbsp;_footer.scss&nbsp;#&nbsp;Footer&nbsp;
+|&nbsp;|–&nbsp;_sidebar.scss&nbsp;#&nbsp;Sidebar&nbsp;
+|&nbsp;|–&nbsp;_forms.scss&nbsp;#&nbsp;Forms&nbsp;
+|&nbsp;...&nbsp;#&nbsp;Etc…&nbsp;
+|&nbsp;
+|–&nbsp;pages/&nbsp;
+|&nbsp;|–&nbsp;_home.scss&nbsp;#&nbsp;Home&nbsp;specific&nbsp;styles&nbsp;
+|&nbsp;|–&nbsp;_contact.scss&nbsp;#&nbsp;Contact&nbsp;specific&nbsp;styles&nbsp;
+|&nbsp;...&nbsp;#&nbsp;Etc…&nbsp;
+|&nbsp;
+|–&nbsp;themes/&nbsp;
+|&nbsp;|–&nbsp;_theme.scss&nbsp;#&nbsp;Default&nbsp;theme&nbsp;
+|&nbsp;|–&nbsp;_admin.scss&nbsp;#&nbsp;Admin&nbsp;theme&nbsp;
+|&nbsp;...&nbsp;#&nbsp;Etc…&nbsp;
+|&nbsp;
+|–&nbsp;vendors/&nbsp;
+|&nbsp;|–&nbsp;_bootstrap.scss&nbsp;#&nbsp;Bootstrap&nbsp;
+|&nbsp;|–&nbsp;_jquery-ui.scss&nbsp;#&nbsp;jQuery&nbsp;UI&nbsp;
+|&nbsp;...&nbsp;#&nbsp;Etc…&nbsp;
+|&nbsp;
+|
+&nbsp;`–&nbsp;main.scss&nbsp;#&nbsp;primary&nbsp;Sass&nbsp;file</pre>
+						</p>
+					</section>
+					<section>
+						<div class="BlogContent"> 
+							<p>接下来，我们依次来看结构中的每一个文件目录。</p> 
+							<h3>Base</h3> 
+							<p><code>base/</code>文件夹包含了一些有关于你的项目中一些模板相关。在这里，你可以看到<code>reset</code>样式(或者Normalize.css,或者其他)，也有一些关于文本排版方面的，当然根据不同的项目会有一些其他的文件。</p> 
+							<ul> 
+								<li><p><code>_reset.scss</code>或<code>_normalize.scss</code></p></li> 
+								<li><p><code>_typography.scss</code></p></li> 
+							</ul> 
+						</div>
+					</section>
+					<section>
+						<div class="BlogContent"> 
+							<h3>Helpers</h3> 
+							<p><code>helpers/</code>文件夹（有的地方也称其为<code>utils/</code>）主要包含了项目中关于Sass的工具和帮助之类。在里面放置了我们需要使用的<code>_function.scss</code>，和<code>_mixin.scss</code>。在这里还包含了一个<code>_variables.scss</code>文件（有的地方也称其为<code>_config.scss</code>），这里包含项目中所有的全局变量（比如排版本上的，配色方案等等）。</p> 
+							<ul> 
+								<li><p><code>_variables.scss</code></p></li> 
+								<li><p><code>_mixin.scss</code></p></li> 
+								<li><p><code>_function.scss</code></p></li> 
+								<li><p><code>_placeholders.scss</code>(也有称为<code>_helpers.scss</code>)</p></li> 
+							</ul> 
+						</div>
+					</section>
+					<section>
+						<h3>Layout</h3> 
+						<p><code>layout/</code>文件夹(也可命名为<code>partials/</code>)中放主要用于布局方面的文件，比如说"header"，“footer”等。他也会包括<code>_grid.scss</code>文件，用来创建网格系统。</p> 
+					</section>
+					<section>
+						<ul> 
+							<li><p><code>_grid.scss</code></p></li> 
+							<li><p><code>_header.scss</code></p></li> 
+							<li><p><code>_footer.scss</code></p></li> 
+							<li><p><code>_sidebar.scss</code></p></li> 
+							<li><p><code>_forms.scss</code></p></li> 
+						</ul> 
+						<p>导航文件（<code>_navigation.scss</code>）文件放在这里也有意义，既可以放<code>components/</code>文件夹中。也可放在<code>layout/</code>文件夹中，当然最后还是由你自己来决定。</p> 
+					</section>
+					<section>
+						<h3>Components</h3> 
+						<p>对于一些小组件，都放在了<code>components/</code>文件夹（通常也称为<code>modules/</code>），<code>layout/</code>是一个宏观的（定义全局的线框），<code>components/</code>是一个微观的。它里面放了一些特定的组件，比如说<code>slider</code>，<code>loading</code>，<code>widget</code>或者其他的小组件。通常<code>components/</code>目录下的都是一些小组件文件。</p> 
+						<ul> 
+							<li><p><code>_media.scss</code></p></li> 
+							<li><p><code>_carousel.scss</code></p></li> 
+							<li><p><code>_thumbnails.scss</code></p></li> 
+						</ul> 
+					</section>
+					<section>
+						<h3>Page</h3> 
+						<p>如果你需要针对一些页面写特定的样式，我想将他们放在<code>page/</code>文件夹中是非常酷的，并且以页面的名称来命名。例如，你的首页需要制作一个特定的样式，那么你就可以在<code>page/</code>文件夹中创建一个名叫<code>_home.scss</code>文件。</p> 
+						<ul> 
+							<li><p><code>_home.scss</code></p></li> 
+							<li><p><code>_contact.scss</code></p></li> 
+						</ul> 
+						<p>根据你自己的布署，你可以根据自己的需求调用这些文件，避免与其他样式文件合并在一起。这真的主取决于你自己。</p> 		
+					</section>
+					<section>
+						<h3>Themes</h3> 
+						<p>如果你像我一样要为一个大型的网站制作多个主题，那么有一个<code>theme/</code>文件夹是非常有意义的。你可以把主题相关的文件放在这个文件夹中。这绝对跟具体的项目有关，你只要觉得跟主题相关的，有必要引入。</p> 
+						<ul> 
+							<li><p><code>_theme.scss</code></p></li> 
+							<li><p><code>_admin.scss</code></p></li> 
+						</ul> 		
+					</section>
+					<section>
+						<div class="BlogContent"> 
+							<h3>Vendors</h3> 
+							<p>最后一个但并非不重要，创建<code>vendors/</code>文件夹，主要用来包含来自外部的库和框架的CSS文件。比如Bootstrap,jQueryUI，FancyCarouselSliderjQueryPowered等等。把这些文件放在同一个文件夹中，你可以说，嘿，这些代码不是我的，不是我写的，跟我无关。</p> 
+							<p>例如：</p> 
+							<ul> 
+								<li><p><code>bootstrap.scss</code></p></li> 
+								<li><p><code>jquery-ui.scss</code></p></li> 
+								<li><p><code>select2.scss</code></p></li> 
+							</ul> 
+						</div>
+					</section>
+					<section>
+						<h2>二、 写Sass 时</h2>
+					</section>
+					<section>
+						<ul> 
+							<li><p>对照mockup，提取公共部分（如颜色、列表、按钮等等）设置成变量</p></li> 
+						</ul> 
+					</section>
+					<section>
+						<p>有些mockup designer 会提供带标注，有的没有，或者有些标注遗漏，这时候，你可以选择问designer 要，或者 自己动手丰衣足食！ </p>
+						<p>目前，网络上很多标注工具，如像素大厨，ps</p>						
+					</section>
+					<section>
+						<p>个人习惯用ps： 如下图：</p>
+						<p><img src="img/sass/getColor.jpg"></p>					
+					</section>
+					<section>
+						<h3>Sass 常用语法</h3>
+					</section>
+					<section>
+						<h4>1. 变量</h4>
+						<div style="text-align: left; width: 48%; float: left;">
+							<p>编译前：</p>
+							<font face="微软雅黑">$white:<span style="color: #006080">#fff;</span><br>$font12:<span style="color: #006080">12px;</span><br><span style="color: #cc6633">.menu</span>{<br>    
+								<p style="text-indent: 2em;"><span style="color: #0000ff">color</span>: <span style="color: #006080">$white;</span></p>  
+								<p style="text-indent: 2em;"><span style="color: #0000ff">font-size</span>: <span style="color: #006080">$font12;</span></p> 
+								}
+							</font>
+						</div>
+						<div style="text-align: left; width: 48%; float: right;">
+							<p>编译后：</p>
+							<font face="微软雅黑"><span style="color: #cc6633">.menu</span> {<br>  
+								<p style="text-indent: 2em;"><span style="color: #0000ff">color</span>: <span style="color: #006080">white;</span></p>  
+								<p style="text-indent: 2em;"><span style="color: #0000ff">font-size</span>: <span style="color: #006080">12px;</span></p> 
+							}<br><br>
+							</font>
+						</div>
+					</section>
+					<section>
+						<h4>2. 嵌套</h4>
+						<p>嵌套极大程度上降低了选择器名称和属性的重复书写。</p>
+						<ul> 
+							<li><p>选择器嵌套</p></li> 
+							<li><p>属性嵌套</p></li> 
+						</ul> 
+					</section>
+					<section>
+						<div style="text-align: left; width: 48%; float: left;">
+							<p>选择器嵌套</p>
+							<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.header</span>{<br>   <span style="color: #cc6633">.logo</span>{<br>       <span style="color: #0000ff">display</span>: <span style="color: #006080">block;</span><br>       <span style="color: #0000ff">border</span>: <span style="color: #006080">none;</span><br>   }<br>   <span style="color: #0000ff">ul</span> <span style="color: #0000ff">li</span>{<br>       line-break: <span style="color: #006080">normal;</span><br>   }<br>}</font></pre>
+						</div>
+						<div style="text-align: left; width: 48%; float: right;">
+							<p>属性嵌套</p>
+							<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #0000ff">h3</span>{<br>    <span style="color: #0000ff">font</span>:{<br>        size:<span style="color: #006080">26px;</span><br>        weight:<span style="color: #006080">normal;</span><br>        family:arial<br>    }<br>}<br></font></pre>
+						</div>
+					</section>
+					<section>
+						<h4>3. 混合器mixin</h4>
+						<p>sass中的混合器一般用来解决大段代码重复的问题。比如我们经常使用的单行文本溢出显示省略号，可以使用@mixin来定义一个简单的混合器：</p>
+						<div style="text-align: left; width: 48%; float: left;">
+							<p>编译前：</p>
+							<div>
+								<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑">@mixin ellipsis {<br>    <span style="color: #0000ff">width</span>: <span style="color: #006080">100%;</span><br>    <span style="color: #0000ff">overflow</span>: <span style="color: #006080">hidden;</span><br>    <span style="color: #0000ff">white-space</span>: <span style="color: #006080">nowrap;</span><br>    text-<span style="color: #0000ff">overflow</span>: <span style="color: #006080">ellipsis;</span><br>}</font></pre>
+							</div>
+							<p>然后在需要用到的地方我们可以通过@include来使用这个混合器：</p>
+							<div>
+								<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.text</span> {<br>    <span style="color: #006080">@include ellipsis;</span><br>}</font></pre>
+							</div>
+							
+						</div>
+						<div style="text-align: left; width: 48%; float: right;">
+							<p>编译后：</p>
+							<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.text</span> {<br>    <span style="color: #0000ff">width</span>: <span style="color: #006080">100%;</span><br>    <span style="color: #0000ff">overflow</span>: <span style="color: #006080">hidden;</span><br>    <span style="color: #0000ff">white-space</span>: <span style="color: #006080">nowrap;</span><br>    text-<span style="color: #0000ff">overflow</span>: <span style="color: #006080">ellipsis;</span><br>}<br></font></pre>
+						</div>
+					</section>
+					<section>
+						<h4>带参数的混合器</h4>
+						<p>混合器不仅可以实现代码的重复利用，还可以传递参数，根据需要生成不同的css。这在跨浏览器的css3兼容方面尤为好用。例如：</p>
+						<div style="text-align: left; width: 48%; float: left;">
+							<p>编译前：</p>
+							<div>
+								<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑">@mixin radius($value) {<br>    -moz-<span style="color: #0000ff">border</span>-radius: <span style="color: #006080">$value;</span><br>    -webkit-<span style="color: #0000ff">border</span>-radius: <span style="color: #006080">$value;</span><br>    <span style="color: #0000ff">border</span>-radius: <span style="color: #006080">$value;</span><br>}</font></pre>
+							</div>
+							<p>使用时，我们只需传入相应的参数值即可。</p>
+							<div>
+								<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.test</span> {<br>    @include radius(3px);<br>}</font></pre>
+							</div>
+							
+						</div>
+						<div style="text-align: left; width: 48%; float: right;">
+							<p>编译后：</p>
+							<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.test</span> {<br>    -moz-<span style="color: #0000ff">border</span>-radius: <span style="color: #006080">3px;</span><br>    -webkit-<span style="color: #0000ff">border</span>-radius: <span style="color: #006080">3px;</span><br>    <span style="color: #0000ff">border</span>-radius: <span style="color: #006080">3px;</span><br>}<br></font></pre>
+						</div>
+					</section>
+					<section>
+						<p>另外我们还可以给参数提供默认值，如：</p>
+						<div style="text-align: left; width: 48%; float: left;">
+							<p>编译前：</p>
+							<div>
+								<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑">@mixin <span style="color: #0000ff">link</span>-colors($normal: #333, $hover: $normal, $visited: $normal) {<br>    <span style="color: #0000ff">color</span>: <span style="color: #006080">$normal;</span><br>    <span style="color: #006080">&amp;</span>:hover {<br>        <span style="color: #0000ff">color</span>: <span style="color: #006080">$hover;</span><br>    }<br>    <span style="color: #006080">&amp;</span>:visited {<br>        <span style="color: #0000ff">color</span>: <span style="color: #006080">$visited;</span><br>    }<br>}</font></pre>
+							</div>
+							<p>调用时，可以传参，也可以不传：</p>
+							<div>
+								<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.text</span> {<br>    @include <span style="color: #0000ff">link</span><span style="color: #006080">-colors;</span><br>}<br><span style="color: #cc6633">.error</span> {<br>    @include <span style="color: #0000ff">link</span>-colors(red);<br>}<br>a {<br>    @include <span style="color: #0000ff">link</span>-colors(blue, green, yellow);<br>}<br></font></pre>
+							</div>
+							
+						</div>
+						<div style="text-align: left; width: 48%; float: right;">
+							<p>编译后：</p>
+							<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #008000">// 鉴于篇幅问题，已将生成的代码改成单行</span><br><span style="color: #cc6633">.text</span> { <span style="color: #0000ff">color</span>: <span style="color: #006080">#333;</span>}<br><span style="color: #cc6633">.text</span>:hover { <span style="color: #0000ff">color</span>: <span style="color: #006080">#333;</span>}<br><span style="color: #cc6633">.text</span>:visited { <span style="color: #0000ff">color</span>: <span style="color: #006080">#333;</span>}<br><br><span style="color: #cc6633">.error</span> { <span style="color: #0000ff">color</span>: <span style="color: #006080">red;</span>}<br><span style="color: #cc6633">.error</span>:hover { <span style="color: #0000ff">color</span>: <span style="color: #006080">red;</span>}<br><span style="color: #cc6633">.error</span>:visited { <span style="color: #0000ff">color</span>: <span style="color: #006080">red;</span>}<br><br>a { <span style="color: #0000ff">color</span>: <span style="color: #006080">blue;</span>}<br>a:hover { <span style="color: #0000ff">color</span>: <span style="color: #006080">green;</span>}<br>a:visited {<span style="color: #0000ff">color</span>: <span style="color: #006080">yellow;</span>}</font></pre>
+						</div>
+					</section>
+					<section>
+						<h4>4. 继承</h4>
+						<p>SASS通过@extend实现继承</p>
+						<div style="clear: both; overflow: hidden;">
+							<div style="text-align: left; width: 48%; float: left;">
+							<p>编译前：</p>
+							<div>
+								<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.pclass</span>{<br>  <span style="color: #0000ff">border</span>: <span style="color: #006080">4px solid #ff9aa9;</span><br>}<br><span style="color: #cc6633">.subclass</span>{<br>  <span style="color: #006080">@extend .pclass;</span><br>  <span style="color: #0000ff">border-width</span>: <span style="color: #006080">2px;</span><br>}</font></pre>
+							</div>
+						</div>
+						<div style="text-align: left; width: 48%; float: right;">
+							<p>编译后：</p>
+							<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.pclass</span>, <span style="color: #cc6633">.subclass</span> {<br>  <span style="color: #0000ff">border</span>: <span style="color: #006080">4px solid #ff9aa9;</span><br>}<br><br><span style="color: #cc6633">.subclass</span> {<br>  <span style="color: #0000ff">border-width</span>: <span style="color: #006080">2px;</span><br>}<br></font></pre>
+						</div>
+						</div>
+						
+						<p>
+							这种继承虽然方便，但是也有一定的弊端。比如我们仅仅想继承.pclass类中的样式，而实际并不需要.pclass的这个类。换句话说就是我们的html中并没有class="pclass"这样的代码，这样的话生成的css中的.pclass其实就是多余的。
+
+对于这种情况，sass3.2.0及以后的版本也给我们提供了解决方案：占位选择器%。
+						</p>
+					</section>
+					<section>
+						<h4>5. 占位选择器%</h4>
+						<p>占位选择器的优势在于：声明之后，如果不调用，则不会产生类似.pclass的多余css代码。占位选择器通过%标识来定义，也是通过@extend来调用。</p>
+						<div style="clear: both; overflow: hidden;">
+							<div style="text-align: left; width: 48%; float: left;">
+							<p>编译前：</p>
+							<div>
+								<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑">%pclass{<br>  <span style="color: #0000ff">border</span>: <span style="color: #006080">4px solid #ff9aa9;</span><br>}<br><span style="color: #cc6633">.subclass</span>{<br>  <span style="color: #006080">@extend %pclass;</span><br>  <span style="color: #0000ff">border-width</span>: <span style="color: #006080">2px;</span><br>}</font></pre>
+							</div>
+						</div>
+						<div style="text-align: left; width: 48%; float: right;">
+							<p>编译后：</p>
+							<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.subclass</span> {<br>  <span style="color: #0000ff">border</span>: <span style="color: #006080">4px solid #ff9aa9;</span><br>  <span style="color: #0000ff">border-width</span>: <span style="color: #006080">2px;</span><br>}<br></font></pre>
+						</div>
+						</div>
+						
+					</section>
+					<section>
+						<h4>6. sass条件判断</h4>
+						<p>sass中的@if语句和js中的if很相似。可以单独使用，也可以配合@else使用。</p>
+						<div style="clear: both; overflow: hidden;">
+							<div style="text-align: left; width: 48%; float: left;">
+							<p>编译前：</p>
+							<div>
+								<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑">$lte7: <span style="color: #006080">true;</span>    <span style="color: #008000">// 是否支持ie7以下版本</span><br>$theme: <span style="color: #006080">yellow;</span><br><span style="color: #cc6633">.clearfix</span> {<br>    @if $lte7 {<br>        zoom: 1;<br>    }<br>    <span style="color: #006080">&amp;</span>:after {<br>        <span style="color: #0000ff">content</span>: <span style="color: #006080">".";</span><br>        <span style="color: #0000ff">display</span>: <span style="color: #006080">block;</span><br>        <span style="color: #0000ff">height</span>: 0;<br>        <span style="color: #0000ff">clear</span>: <span style="color: #006080">both;</span><br>        <span style="color: #0000ff">visibility</span>: <span style="color: #006080">hidden;</span><br>    }<br>}<br><br><span style="color: #0000ff">body</span> {<br>    @if $theme == red {<br>        <span style="color: #0000ff">background</span>: rgba(255, 0, 0, 0.5);<br>    } @else if $theme == yellow {<br>        <span style="color: #0000ff">background</span>: rgba(255, 255, 0, 0.5);<br>    } @else if $theme == black {<br>        <span style="color: #0000ff">background</span>: rgba(0, 0, 0, 0.5);<br>    }<br>}</font></pre>
+							</div>
+						</div>
+						<div style="text-align: left; width: 48%; float: right;">
+							<p>编译后：</p>
+							<pre id="codeSnippet" style="border-top-style: none; overflow: visible; font-size: 12pt; font-family: 'Courier New', courier, monospace; width: 100%; border-bottom-style: none; color: black; padding-bottom: 0px; direction: ltr; text-align: left; padding-top: 0px; border-right-style: none; padding-left: 0px; margin: 0em; border-left-style: none; line-height: 12pt; padding-right: 0px; background-color: #f4f4f4"><font face="微软雅黑"><span style="color: #cc6633">.clearfix</span> {<br>    zoom: 1;<br>}<br><span style="color: #cc6633">.clearfix</span>:after {<br>    <span style="color: #0000ff">content</span>: <span style="color: #006080">".";</span><br>    <span style="color: #0000ff">display</span>: <span style="color: #006080">block;</span><br>    <span style="color: #0000ff">height</span>: 0;<br>    <span style="color: #0000ff">clear</span>: <span style="color: #006080">both;</span><br>    <span style="color: #0000ff">visibility</span>: <span style="color: #006080">hidden;</span><br>}<br><span style="color: #0000ff">body</span> {<br>    <span style="color: #0000ff">background</span>: rgba(255, 255, 0, 0.5);<br>}<br></font></pre>
+							<div>sass语法 参考 淡忘~浅思 » SASS小结</div>
+						</div>
+						</div>
+						
+					</section>
+					<section>
+						<h2>三、 写完Sass 后</h2>
+						<p>建议自己 对自己的代码做一个code review以及一些修整，这样，sass 代码看起来会更干净、整洁！</p>
+					</section>
+				</section>
+
+								<!-- Steven部分 -->
+				<section>
+					<section>
+						<h2>有些事情花了我们很多时间,<h2>
+						<h2>但应该可以避免的,例如.  .  .</h2>
+					</section>
+					<section>
+						<p>1.各种样式的频繁修改，如字体、对齐方式、颜色、尺寸等</p>
+						<img width="600px" src="img/layout-modify.gif" alt="What the..."/>
+						<!-- <ul>
+							<ol>各种组件样式的频繁修改。如按钮、下拉框、文本框的对齐方式、颜色、尺寸、hover效果等等</ol>
+							<ol>项目中后期样式的调整。由于css写得耦合度太高，即使是微小的对齐方式、间距的调整，都花费了大量时间，而且经常改好一个地方，另一个地方错了。</ol>
+							<ol>在项目初期，大家对angular不太了解，各自对js的掌握程度和习惯都不同的时候，没有定好相关的编码规范或没有很好的执行，项目中有各种各样的写法。同时由于有分组的情况，这会导致跨组维护代码比较困难。</ol>
+							<ol>项目前期，前后端扯皮</ol>
+						</ul>		 -->
+					</section>
+					<section>
+						<p>2.项目中后期样式的调整。</p>
+						<p>由于css写得耦合度太高，即使是微小的样式调整，也要花费大量时间，而且经常改好一个地方，另一个地方又错了。</p>
+					</section>
+					<section>
+						<p>例如，我要让某页面的按钮从左对齐改成右对齐。</p>						
+						<p>这里用了很多后代选择器来控制样式。于是我找到这个页面顶级对象的id：facility-management。</p>
+						<p>然后到scss文件中搜了一下. . .</p>
+					</section>
+					<section>
+						<img height="680px" src="img/css-problem.png" alt="">
+					</section>
+					<section>
+						<p>我当时的心理活动：</p>
+						<img src="img/suprise.jpg" alt="">
+					</section>
+					<section>
+						<p>好吧，我承认这些大部分是我自己写的。</p>
+						<img height="400px" src="img/nozuonodie.jpg" alt="">
+					</section>
+					<section>
+						<p>3.项目初期</p>
+						<ul>
+							<li>对angular不太了解</li>
+							<li>编码习惯差异</li>
+							<li>采用分组方式进行开发</li>
+						</ul>
+						<p>导致跨组维护代码比较困难</p>
+					</section>
+					<section>
+						<p>4.项目前期，前后端互相推诿</p>
+					</section>
+					<section>
+						<p>例如，有个功能要计算1+1的结果并显示在页面上. . .</p>
+						<img src="img/quarrel.jpg" alt="">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>上述问题, 可以这么解决</h2>
+					</section>
+					<section>
+						<h3>1.制定UI标准和组件库</h3>
+						<p>前面已经提过，这里仅粗略再提一下</p>
+					</section>
+					<section>
+						<p>已包含的组件</p>
+						<ul>
+							<li>日历</li>
+							<li>按钮</li>
+							<li>下拉框</li>
+							<li>等等……</li>
+						</ul>
+					</section>
+					<section>
+						<p>例如我们的按钮标准：</p>
+						<img src="img/buttons.png" alt="">
+					</section>
+					<section>
+						<h3>2.提取公用功能做成angular指令</h3>
+					</section>
+					<section>
+						<p>已有的指令：</p>
+						<ul>
+							<li>分页</li>
+							<li>弹窗</li>
+							<li>等等……</li>
+						</ul>
+					</section>
+					<section>
+						<h3>3.制定CSS编写规范</h3>
+						<p>编写模块化CSS，可参考<a href="http://www.w3cplus.com/css/an-introduction-to-object-oriented-css-oocss.html" target="_blank">OOCSS</a>.</p>
+						<p>没有实行，现在的css已经积重难返，每次改样式都很痛苦。</p>
+					</section>
+					<section>
+						<p>OOCSS中的部分建议</p>
+						<br>
+						<ul>
+							<li>避免后代选择器(如不要使用类似于.sidebar h3)</li>
+							<li>避免使用id选择器</li>
+							<li>避免在你的样式表中给类名附属一个元素名(如不要这样做div.header or h1.title)</li>
+							<li>除非一些很少的情况，避免使用!important</li>
+						</ul>
+					</section>
+					<section>
+						<h3>4.制定JS编写规范</h3>
+						<p>前面已经提过，在此不在敖述</p>
+					</section>
+					<section>
+						<h3>5.代码审查</h3>
+					</section>
+					<section style='text-align:left;'>
+						<p>可以管控规范是否有效执行。</p>
+						<p>项目中前期靠前端leader执行,后来由于进度压力而被忽略。</p>
+						<p>若能坚持执行,项目质量会有所提高,改bug时间会有所减少。</p>
+					</section>
+					<section>
+						<h3>6.明确前后端职责，订立规则</h3>
+					</section>
+					<section style='text-align:left;'>
+						<p>在项目前期发挥作用</p>
+						<p>没有绝对正确的规则,及早确定职责,是为了减少推诿发生.</p>
+						<p>例如样式、表现内容的格式化交给前端，获取数据、复杂业务逻辑交给后端</p>
+					</section>
+					<section style='text-align:left;'>
+						<p>项目进行过程中不断改进规则</p>
+						<p>团队磨合后，可丢弃规则</p>
+					</section>
+					<section>
+						<h3>7.业务需求分析</h3>
+						<p>在编码前,建议要顶住压力先把业务需求理清,避免后期的反复修改</p>
+					</section>
+				</section>
+				<section>
+					<h1>完</h1>
+					<br>
+					<br>
+					<h2>谢谢</h2>
+				</section>
+				<section>
+					<section id="fragments">
+						<h2>Fragments</h2>
+						<p>Hit the next arrow...</p>
+						<p class="fragment">... to step through ...</p>
+						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+
+						<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>
+					</section>
+					<section>
+						<h2>Fragment Styles</h2>
+						<p>There's different types of fragments, like:</p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p class="fragment current-visible">current-visible</p>
+						<p class="fragment highlight-red">highlight-red</p>
+						<p class="fragment highlight-blue">highlight-blue</p>
+					</section>
+				</section>
+
+				<section id="transitions">
+					<h2>Transition Styles</h2>
+					<p>
+						You can select from different transitions, like: <br>
+						<a href="?transition=none#/transitions">None</a> -
+						<a href="?transition=fade#/transitions">Fade</a> -
+						<a href="?transition=slide#/transitions">Slide</a> -
+						<a href="?transition=convex#/transitions">Convex</a> -
+						<a href="?transition=concave#/transitions">Concave</a> -
+						<a href="?transition=zoom#/transitions">Zoom</a>
+					</p>
+				</section>
+
+				<section id="themes">
+					<h2>Themes</h2>
+					<p>
+						reveal.js comes with a few themes built in: <br>
+						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
+					</p>
+				</section>
+
+				<section>
+					<section data-background="#dddddd">
+						<h2>Slide Backgrounds</h2>
+						<p>
+							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
+						</p>
+						<a href="#" class="navigate-down">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
+						<h2>Image Backgrounds</h2>
+						<pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
+					</section>
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
+						<h2>Tiled Backgrounds</h2>
+						<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
+					</section>
+					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
+						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+							<h2>Video Backgrounds</h2>
+							<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
+						</div>
+					</section>
+					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<h2>... and GIFs!</h2>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
+					</p>
+					<pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						You can override background transitions per-slide.
+					</p>
+					<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
+				</section>
+
+				<section>
+					<h2>Pretty Code</h2>
+					<pre><code class="hljs" data-trim contenteditable>
+function linkify( selector ) {
+  if( supports3DTransforms ) {
+
+    var nodes = document.querySelectorAll( selector );
+
+    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
+      var node = nodes[i];
+
+      if( !node.className ) {
+        node.className += ' roll';
+      }
+    }
+  }
+}
+					</code></pre>
+					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+				</section>
+
+				<section>
+					<h2>Marvelous List</h2>
+					<ul>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Fantastic Ordered List</h2>
+					<ol>
+						<li>One is smaller than...</li>
+						<li>Two is smaller than...</li>
+						<li>Three!</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Tabular Tables</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Item</th>
+								<th>Value</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Apples</td>
+								<td>$1</td>
+								<td>7</td>
+							</tr>
+							<tr>
+								<td>Lemonade</td>
+								<td>$2</td>
+								<td>18</td>
+							</tr>
+							<tr>
+								<td>Bread</td>
+								<td>$3</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<h2>Clever Quotes</h2>
+					<p>
+						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
+					</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
+						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>Intergalactic Interconnections</h2>
+					<p>
+						You can link between slides internally,
+						<a href="#/2/3">like this</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Speaker View</h2>
+					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
+					<p>Press the <em>S</em> key to try it out.</p>
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h2>Export to PDF</h2>
+					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
+		<!-- 			<iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> -->
+				</section>
+
+				<section>
+					<h2>Global State</h2>
+					<p>
+						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
+						will be added as a class to the document element when the slide is open. This lets you
+						apply broader style changes, like switching the page background.
+					</p>
+				</section>
+
+				<section data-state="customevent">
+					<h2>State Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+Reveal.addEventListener( 'customevent', function() {
+	console.log( '"customevent" has fired' );
+} );
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Take a Moment</h2>
+					<p>
+						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
+					</p>
+				</section>
+
+				<section>
+					<h2>Much more</h2>
+					<ul>
+						<li>Right-to-left support</li>
+						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
+					</ul>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+						- <a href="http://slides.com">Try the online editor</a> <br>
+						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="lib/js/jquery.js"></script>
+		<script src="lib/js/typed.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+		<script>
+		    Reveal.addEventListener('slidechanged', function( event ) {
+			    if(!!$(".somestate").html()){
+			    	$("#test").typed({
+		            strings: ["First sentence.", "Second sentence."],
+		            typeSpeed: 0
+		        });
+			    }
+			});
+		</script>
+
+	</body>
+</html>
