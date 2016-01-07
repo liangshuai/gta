@@ -1,0 +1,16 @@
+<script>
+var a = [{t: '10', p: 0},{t: '20', p: 0},{t: '30', p: 99},{t: '40', p: 0},{t: '50', p: 0}]
+var b = a.sort(function (a, b) {
+    return (a.p > 0 && a.p > b.p) ? 1 : -1;
+})
+
+var c = a.sort(function(a, b) {
+                    if (a.p > 0 && a.p > b.p) return -1;
+                    if (a.p > 0 && a.p < b.p) return 1;
+                    return 0;
+                });
+var str = b.map(function(v) { return v.t;}).join('-');
+var str1 = c.map(function(v) { return v.t;}).join('-');
+document.write(str);
+document.write(str1);
+</script>
